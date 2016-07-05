@@ -10,26 +10,15 @@ class CategoriesHandler implements HandlerInterface
 {
     public function prepare($data)
     {
-//        $categories = [];
-
-//        var_dump($data);
-//
-//        foreach($data as $category) {
-//            $categories[] = [
-//                'id' => $category['id'],
-//                'parentId' => $category['parent_id'],
-//                'name' => $category['categoryName']
-//            ];
-//        }
-
-
-        $categories = ['Мобильные телефоны',
-            'Бытовая техника',
-            'Пылесосы',
-            'Миксеры',
-            'Фотоаппараты'
-        ];
-
+        $categories = [];
+        foreach($data as $category) {
+            $categories[] = [
+                'id' => $category['id'],
+                'parentId' => $category['parent_id'],
+                'url' => $category['url'],
+                'name' => $category['categoryName']
+            ];
+        }
 
         return $categories;
     }

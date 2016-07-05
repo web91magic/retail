@@ -11,7 +11,6 @@ class OrdersHandler implements HandlerInterface
 
     public function prepare($data)
     {
-//        var_dump($data);
         // создаем новаый массив, который позволяет хранить все заказы
         $orders = [];
 
@@ -67,7 +66,6 @@ class OrdersHandler implements HandlerInterface
 
             // paymentType - числовое значение, paymentStatus - числовое значение, которое должно быть представлено как
             // paid, not-paid или more
-//            $order['paymentStatus'] = 'Оплата через Интеркассу';
 
             $order = DataHelper::filterRecursive($order);
 

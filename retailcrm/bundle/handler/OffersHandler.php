@@ -11,33 +11,21 @@ class OffersHandler implements HandlerInterface
 
     public function prepare($offers)
     {
-//        $categories = $this->getCategories();
-//        var_dump($offers);
-
         // позволит нам выбрать корневую директорию, через которую сможем ссылаться на изображения товаров
         $container = Container::getInstance();
-        $container->shopUrl;
+        $categories = $this->getCategories();
 
-        foreach ($offers as $k => $v) {
-//            $picture = 'upload/shop_1/' .
-//                substr($v['id'], 0, 1) . '/' .
-//                substr($v['id'], 1, 1) . '/' .
-//                substr($v['id'], 2, 1) . '/' .
-//                'item_'. $v['id'] .'/' .
-//                $v['picture'];
-//            $offers[$k]['picture'] = $container->shopUrl . '/' . $picture;
-//
-//            $categoryId = $v['categoryId'];
-//            $offers[$k]['url'] = $container->shopUrl . '/shop/' . $categories[$categoryId]['path'] .'/'. $v['url'];
-//            $offers[$k]['categoryId'] = array($categoryId);
-            $offers[$k] = array_filter($offers[$k]);
+        foreach ($offers AS $key => $value) {
+            // построим для каждого наименования url
+            $offers[$key]['url'] = $container->shopUrl . $categories[$offers[$key]['categoryId'] - 1]['url'] .
+                '/' . $offers[$key]['name'];
+
+            // построим адрес для каждой картинки относительно магазина simpla
+            $offers[$key]['picture'] = $container->shopUrl . 'files/products/' . $offers[$key]['picture'];
         }
 
-        return ['name' => 'SimplaShop', 'categories' => [
-//            Мобильные телефоны
-        ]];
+        return $offers;
     }
-
 
     // данный метод предназначен для выбора категорий, которые будут выпадать из списка
     private function getCategories()
@@ -46,11 +34,6 @@ class OffersHandler implements HandlerInterface
         $builder = new ExtendedOffersBuilder();
         $data = $builder->buildCategories();
 
-
-
-        $categories = [];
-
-
-        return $categories;
+        return $data;
     }
 }

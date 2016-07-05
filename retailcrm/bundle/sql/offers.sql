@@ -3,9 +3,10 @@ SELECT
   s_categories.id AS `categoryId`,
   s_categories.name AS `category`,
   s_products.name AS `productName`,
+  s_products.name AS `name`,
   s_variants.name AS `variantName`,
+  s_variants.stock AS `quantity`,
   s_variants.price AS `price`,
-  s_brands.name AS `brand`,
   s_products.created AS `createdAt`,
   (CASE s_products.visible
    WHEN 0

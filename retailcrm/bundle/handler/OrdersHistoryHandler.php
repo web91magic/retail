@@ -8,22 +8,15 @@
  */
 class OrdersHistoryHandler implements HandlerInterface
 {
-
     public function prepare($data)
     {
-
-        var_dump($data);
-
 //        класс - обертка для хранения конфигурации(загружается settings . ini, который инициализирует поля класса контайнер)
         $container = Container::getInstance();
 
         $logger = new Logger();
+        
         // класс-обработчик для работы с хендлерами и запросами, которые хранянтся в папке sql
         $rule = new Rule();
-
-        $api = new RequestProxy($container->settings['api']['url'],
-            $container->settings['api']['key']);
-
 
         $update = $rule->getSQL('orders_history_update');
         $create = $rule->getSQL('orders_history_create');
