@@ -10,8 +10,6 @@ class OrdersHistoryHandler implements HandlerInterface
 {
     public function prepare($data)
     {
-        var_dump($data);
-
 //        класс - обертка для хранения конфигурации(загружается settings . ini, который инициализирует поля класса контайнер)
         $container = Container::getInstance();
 
