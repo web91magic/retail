@@ -18,7 +18,7 @@ class OrdersHandler implements HandlerInterface
         // выборки из базы данных симплы
         foreach ($data as $record) {
             $nameSeparation = explode(' ', $record['fullName']);
-            $order['externalId'] = $record['externalId'];
+            $order['number'] = $record['externalId'];
 
             // проверяяем есть ли имя
             $order['firstName'] = array_key_exists(0, $nameSeparation) ? $nameSeparation[0] : '';
@@ -71,6 +71,7 @@ class OrdersHandler implements HandlerInterface
 
             array_push($orders, $order);
         }
+
 
         return $orders;
     }
