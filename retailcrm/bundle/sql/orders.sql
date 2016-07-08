@@ -11,7 +11,7 @@ SELECT
   s_orders.status            AS `paymentStatus`,
   s_orders.payment_date      AS `createdAt`,
   (SELECT GROUP_CONCAT(
-      CONCAT_WS(';', s_purchases.product_id,
+      CONCAT_WS(';', s_orders.id, s_purchases.id,
                 s_purchases.product_name, s_purchases.amount, s_purchases.price) SEPARATOR '|'
   ))                         AS items,
   (CASE

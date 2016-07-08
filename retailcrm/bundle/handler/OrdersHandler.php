@@ -19,6 +19,8 @@ class OrdersHandler implements HandlerInterface
         foreach ($data as $record) {
             $nameSeparation = explode(' ', $record['fullName']);
             $order['number'] = $record['externalId'];
+            $order['externalId'] = $record['externalId'];
+//            echo 'ID' . $record['id'];
 
             // проверяяем есть ли имя
             $order['firstName'] = array_key_exists(0, $nameSeparation) ? $nameSeparation[0] : '';
@@ -42,10 +44,11 @@ class OrdersHandler implements HandlerInterface
             foreach ($items AS $item) {
                 $data = explode(';', $item);
                 $item = [];
-                $item['productId'] = $data[0];
-                $item['productName'] = (isset($data[1])) ? $data[1] : 'no-name';
-                $item['quantity'] = (isset($data[2])) ? (int)$data[2] : 0;
-                $item['initialPrice'] = (isset($data[3]) && $data[3] != '') ? $data[3] : 0;
+//                $item['offer']['externalId'] = $data[0];
+                $item['externalId'] = $data[1];
+                $item['productName'] = (isset($data[2])) ? $data[2] : 'no-name';
+                $item['quantity'] = (isset($data[3])) ? (int)$data[3] : 0;
+                $item['initialPrice'] = (isset($data[4]) && $data[4] != '') ? $data[4] : 0;
 
                 array_push($order['items'], $item);
             }
@@ -63,9 +66,6 @@ class OrdersHandler implements HandlerInterface
 
             // Вывод комментария заказа
             $order['customerComment'] = $record['customerComment'];
-
-            // paymentType - числовое значение, paymentStatus - числовое значение, которое должно быть представлено как
-            // paid, not-paid или more
 
             $order = DataHelper::filterRecursive($order);
 

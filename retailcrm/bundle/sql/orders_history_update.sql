@@ -7,4 +7,4 @@ SET name            = IF(:name IS NOT NULL, :name, ''),
   delivery_price    = IF(:delivery_price IS NOT NULL, :delivery_price, ''),
   payment_method_id = IF(:payment_method_id IS NOT NULL, :payment_method_id, ''),
   paid              = IF(:paid IS NOT NULL, :paid, '')
-WHERE id = :id;
+WHERE `s_orders`.id = :id;
