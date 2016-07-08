@@ -44,7 +44,6 @@ class OrdersHandler implements HandlerInterface
             foreach ($items AS $item) {
                 $data = explode(';', $item);
                 $item = [];
-//                $item['offer']['externalId'] = $data[0];
                 $item['externalId'] = $data[1];
                 $item['productName'] = (isset($data[2])) ? $data[2] : 'no-name';
                 $item['quantity'] = (isset($data[3])) ? (int)$data[3] : 0;
