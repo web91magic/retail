@@ -10,6 +10,7 @@ class OrdersHistoryHandler implements HandlerInterface
 {
     public function prepare($data)
     {
+        var_dump($data);
 //        класс - обертка для хранения конфигурации(загружается settings . ini, который инициализирует поля класса контайнер)
         $container = Container::getInstance();
         $logger = new Logger();
@@ -102,6 +103,17 @@ class OrdersHistoryHandler implements HandlerInterface
                     $items = $rule->getSQL('delete_item');
                     $query = $container->db->prepare($items);
                     $query->bindParam(':id', $item['externalId']);
+                } else {
+                    // то тогда мы можеи обновить свойства
+                    $items = $rule->getSQL('update_item');
+                    $query = $container->db->prepare($items);
+                    $query->bindParam(':externalId', $item['externalId']);
+                    $query->bindParam(':summ', $record['summ']);
+                    $query->bindParam(':price', $record['initialPrice']);
+                    $query->bindParam(':purchaseSumm', $record['purchaseSumm']);
+                    $query->bindParam(':discount', $item['discount']);
+                    $query->bindParam(':name', $item['offer']['name']);
+                    $query->bindParam(':quantity', $item['quantity"']);
                 }
                 try {
                     $query->execute();
